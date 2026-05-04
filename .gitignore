@@ -1,0 +1,6 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+static/img/*.png
+!static/img/.gitkeep

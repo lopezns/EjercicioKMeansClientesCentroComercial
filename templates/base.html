@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}K-Means Clientes{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header class="topbar">
+        <a class="brand" href="{{ url_for('home') }}">K-Means Clientes</a>
+        <nav class="nav">
+            <a href="{{ url_for('home') }}">Inicio</a>
+            <a href="{{ url_for('dataset') }}">Dataset</a>
+            <a href="{{ url_for('conceptos') }}">Conceptos</a>
+            <a href="{{ url_for('modelo') }}">Modelo</a>
+            <a href="{{ url_for('interpretacion') }}">Interpretación</a>
+        </nav>
+    </header>
+
+    <main class="container">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        Implementación de K-Means Clustering con Flask<br>
+        Nicolás López Sánchez<br>
+        Lina Mariana Pinzón Pinzón<br>
+        Minería de Datos
+    </footer>
+</body>
+</html>

@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Resultados | K-Means con Flask{% endblock %}
+
+{% block content %}
+<section class="section">
+    <h1>Resumen de clusters</h1>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Cluster</th>
+                    <th>Clientes</th>
+                    <th>Edad promedio</th>
+                    <th>Ingreso promedio</th>
+                    <th>Gasto promedio</th>
+                    <th>Interpretacion</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fila in resultados %}
+                    <tr>
+                        <td>{{ fila.Cluster }}</td>
+                        <td>{{ fila.clientes }}</td>
+                        <td>{{ fila.edad_promedio }}</td>
+                        <td>{{ fila.ingreso_promedio }}</td>
+                        <td>{{ fila.gasto_promedio }}</td>
+                        <td>{{ fila.interpretacion }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

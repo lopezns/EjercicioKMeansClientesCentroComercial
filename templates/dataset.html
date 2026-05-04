@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block title %}Dataset | K-Means con Flask{% endblock %}
+
+{% block content %}
+<section class="section">
+    <p class="eyebrow">Preparación de datos</p>
+    <h1>Dataset seleccionado</h1>
+    <p>
+        Se utiliza el archivo <strong>Mall_Customers.csv</strong>, un conjunto de datos de
+        clientes de un centro comercial. Contiene información demográfica y comportamiento
+        de gasto.
+    </p>
+</section>
+
+<section class="metrics">
+    <div><span>Registros</span><strong>{{ info.cantidad_registros }}</strong></div>
+    <div><span>Columnas</span><strong>{{ info.cantidad_columnas }}</strong></div>
+    <div><span>Valores nulos</span><strong>0</strong></div>
+</section>
+
+<section class="grid two">
+    <article class="card">
+        <h2>Variables utilizadas</h2>
+        {% for variable in info.variables %}
+            <p><strong>{{ variable.nombre }}:</strong> {{ variable.descripcion }}</p>
+        {% endfor %}
+    </article>
+    <article class="card">
+        <h2>Limpieza aplicada</h2>
+        <p>Lectura del CSV con pandas.</p>
+        <p>Eliminación de registros duplicados.</p>
+        <p>Conversión de variables numéricas y eliminación de filas inválidas.</p>
+        <p>Escalamiento con StandardScaler antes de entrenar K-Means.</p>
+    </article>
+</section>
+
+<section class="section">
+    <h2>Primeros registros</h2>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    {% for columna in info.columnas %}
+                        <th>{{ columna }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for fila in info.primeros_registros %}
+                    <tr>
+                        {% for columna in info.columnas %}
+                            <td>{{ fila[columna] }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Resumen estadístico</h2>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    {% for columna in info.descripcion[0].keys() %}
+                        <th>{{ columna }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for fila in info.descripcion %}
+                    <tr>
+                        {% for valor in fila.values() %}
+                            <td>{{ valor }}</td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}
