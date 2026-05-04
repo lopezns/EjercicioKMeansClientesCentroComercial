@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}Modelo | K-Means con Flask{% endblock %}
+
+{% block content %}
+<section class="section">
+    <p class="eyebrow">Ejecucion del modelo</p>
+    <h1>Aplicacion de K-Means</h1>
+    <p>
+        Selecciona el numero de clusters. Para este dataset se recomienda K=5 por el metodo
+        del codo y por la interpretacion de segmentos de clientes.
+    </p>
+
+    <form class="form" method="post">
+        <label for="nclusters">Numero de clusters</label>
+        <input type="number" id="nclusters" name="nclusters" min="2" max="10" value="{{ nclusters }}">
+        <button class="button" type="submit">Ejecutar K-Means</button>
+    </form>
+</section>
+
+<section class="grid two">
+    <article class="chart-panel">
+        <h2>Grafica de clusters</h2>
+        <img src="{{ url_for('static', filename=info.grafica_clusters) }}" alt="Grafica de clusters">
+    </article>
+    <article class="chart-panel">
+        <h2>Metodo del codo</h2>
+        <img src="{{ url_for('static', filename=info.grafica_codo) }}" alt="Grafica del metodo del codo">
+    </article>
+</section>
+
+<section class="section">
+    <h2>Centroides</h2>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Cluster</th>
+                    <th>Ingreso anual (k$)</th>
+                    <th>Puntaje de gasto</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for centroide in info.Centroides %}
+                    <tr>
+                        <td>{{ centroide.Cluster }}</td>
+                        <td>{{ centroide["Annual Income (k$)"] }}</td>
+                        <td>{{ centroide["Spending Score (1-100)"] }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Resumen de clusters</h2>
+    <div class="table-wrap">
+        <table>
+            <thead>
+                <tr>
+                    <th>Cluster</th>
+                    <th>Clientes</th>
+                    <th>Edad promedio</th>
+                    <th>Ingreso promedio</th>
+                    <th>Gasto promedio</th>
+                    <th>Interpretacion</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fila in info.resumenClusters %}
+                    <tr>
+                        <td>{{ fila.Cluster }}</td>
+                        <td>{{ fila.clientes }}</td>
+                        <td>{{ fila.edad_promedio }}</td>
+                        <td>{{ fila.ingreso_promedio }}</td>
+                        <td>{{ fila.gasto_promedio }}</td>
+                        <td>{{ fila.interpretacion }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Datos procesados con cluster asignado</h2>
+    <div class="table-wrap tall">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Genero</th>
+                    <th>Edad</th>
+                    <th>Ingreso anual (k$)</th>
+                    <th>Puntaje de gasto</th>
+                    <th>Cluster</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for fila in info.resultados %}
+                    <tr>
+                        <td>{{ fila.CustomerID }}</td>
+                        <td>{{ fila.Genre }}</td>
+                        <td>{{ fila.Age }}</td>
+                        <td>{{ fila["Annual Income (k$)"] }}</td>
+                        <td>{{ fila["Spending Score (1-100)"] }}</td>
+                        <td><strong>{{ fila.Cluster }}</strong></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</section>
+{% endblock %}

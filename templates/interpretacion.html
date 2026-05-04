@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Interpretacion | K-Means con Flask{% endblock %}
+
+{% block content %}
+<section class="section">
+    <p class="eyebrow">Análisis de resultados</p>
+    <h1>Interpretación de los clusters</h1>
+    <p>
+        Con K={{ info.k_seleccionado }}, los clientes se agrupan segun patrones de ingreso anual
+        y puntaje de gasto. La normalizacion evita que una variable domine a la otra por escala.
+    </p>
+</section>
+
+<section class="section">
+    <h2>Patrones identificados</h2>
+    <div class="cluster-list">
+        {% for fila in info.resumenClusters %}
+            <article class="card">
+                <h3>Cluster {{ fila.Cluster }}</h3>
+                <p><strong>{{ fila.clientes }} clientes.</strong></p>
+                <p>Ingreso promedio: {{ fila.ingreso_promedio }} k$.</p>
+                <p>Puntaje de gasto promedio: {{ fila.gasto_promedio }}.</p>
+                <p>{{ fila.interpretacion }}</p>
+            </article>
+        {% endfor %}
+    </div>
+</section>
+
+{% endblock %}

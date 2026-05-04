@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Inicio | K-Means con Flask{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <div>
+        <p class="eyebrow">Minería de Datos</p>
+        <h1>Segmentación de clientes usando K-Means Clustering</h1>
+        <p>
+            Esta aplicación web permite analizar clientes de un centro comercial y agruparlos
+            automaticamente según su ingreso anual y su puntaje de gasto.
+        </p>
+        <a class="button" href="{{ url_for('modelo') }}">Ejecutar modelo</a>
+    </div>
+    <div class="hero-panel">
+        <span>Dataset</span>
+        <strong>Mall Customers</strong>
+        <span>200 registros</span>
+        <span>Variables: Ingreso anual y puntaje de gasto</span>
+        <span>Link del Dataset: <a href="https://www.kaggle.com/datasets/shwetabh123/mall-customers/data" target="_blank">Kaggle</a></span>
+    </div>
+</section>
+
+<section class="section">
+    <h2>Descripción del problema</h2>
+    <p>
+        Un centro comercial necesita identificar grupos de clientes con comportamientos
+        similares para tomar mejores decisiones de mercadeo, fidelización y promociones.
+        El algoritmo K-Means permite descubrir segmentos sin usar etiquetas previas.
+    </p>
+</section>
+
+<section class="grid two">
+    <article class="card">
+        <h3>Objetivo</h3>
+        <p>
+            Implementar una aplicacion en Flask que cargue un dataset, prepare los datos,
+            aplique K-Means y visualice clusters, centroides y método del codo, para llevar 
+            a cabo el análisis de segmentación de clientes.
+        </p>
+    </article>
+    <article class="card">
+        <h3>Resultado esperado</h3>
+        <p>
+            Una gráfica de dispersión con los clientes agrupados, una tabla con la etiqueta
+            asignada a cada registro y una interpretación de los patrones encontrados.
+        </p>
+    </article>
+</section>
+{% endblock %}
