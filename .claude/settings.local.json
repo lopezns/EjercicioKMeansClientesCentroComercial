@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add *)",
+      "Bash(git commit -m 'Fix Render deployment: specify Python 3.12.0, include generated images and update .gitignore *)"
+    ]
+  }
+}
